@@ -7,19 +7,15 @@ type Props = {
 };
 
 export const TodoList: React.FC<Props> = ({ todos, onSelect }) => {
-  const allCompleted = todos.every(todo => todo.completed);
-
   return (
     <table className="table is-narrow is-fullwidth">
       <thead>
         <tr>
           <th>#</th>
           <th>
-            {allCompleted && (
-              <span className="icon">
-                <i className="fas fa-check" />
-              </span>
-            )}
+            <span className="icon">
+              <i className="fas fa-check" />
+            </span>
           </th>
           <th>Title</th>
           <th> </th>
@@ -30,7 +26,13 @@ export const TodoList: React.FC<Props> = ({ todos, onSelect }) => {
         {todos.map(todo => (
           <tr key={todo.id} data-cy="todo" className="">
             <td className="is-vcentered">{todo.id}</td>
-            <td className="is-vcentered" />
+            <td className="is-vcentered">
+              {todo.completed && (
+                <span className="icon">
+                  <i className="fas fa-check" />
+                </span>
+              )}
+            </td>
             <td className="is-vcentered is-expanded">
               <p
                 className={
